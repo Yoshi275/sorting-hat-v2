@@ -2,48 +2,41 @@ function Stats(){};
 
 module.exports = Stats;
 
-Stats.countGenders = function(jsonfile) {
+// returns female and male count
+Stats.countGenders = function(arr) {
     femaleCount = 0;
     maleCount = 0;
-    for(let i = 0; i < jsonfile.length; i++) {
-        const student = jsonfile[i];
+    for(let i = 0; i < arr.length; i++) {
+        const student = arr[i];
         if(student.Gender === 'Female') {
             femaleCount++;
         } else {
             maleCount++;
         }
     }
-    console.log("Females: " + femaleCount);
-    console.log("Males: " + maleCount);
-    console.log();
-    return;
+    return "Females: " + femaleCount + "\nMales:" + maleCount;
 }
 
-Stats.countFaculties = function(jsonfile) {
-    let facultyDict = {};
+// returns faculty count
+Stats.countFaculties = function(array) {
     let facultyCountDict = {};
-    for(let i = 0; i < jsonfile.length; i++) {
-        const student = jsonfile[i];
+    for(let i = 0; i < array.length; i++) {
+        const student = array[i];
         const facName = student.Faculty;
         if(facultyCountDict[facName]) {
             facultyCountDict[facName]++;
-            facultyDict[facName].push(student.Name);
         } else {
             facultyCountDict[facName] = 1;
-            facultyDict[facName] = [student.Name];
         }
     }
+    let facultyReport = "";
     for(let key in facultyCountDict) {
-        console.log(key + " Count: " + facultyCountDict[key])
+        facultyReport += (key + " Count: " + facultyCountDict[key] + "\n")
     }
-    console.log(facultyDict["Computing"]);
-    for(let key in facultyDict) {
-        console.log(key + " STUDENTS: " + facultyDict[key])
-        console.log()
-    }
-    return;
+    return facultyReport;
 }
 
+// returns school count
 Stats.countSchools = function(jsonfile) {
     let schoolCountDict = {};
     for(let i = 0; i < jsonfile.length; i++) {
@@ -55,9 +48,9 @@ Stats.countSchools = function(jsonfile) {
             schoolCountDict[schoolName] = 1;
         }
     }
+    let schoolReport = ""
     for(let key in schoolCountDict) {
-        console.log(key + " Count: " + schoolCountDict[key])
+        schoolReport += (key + " Count: " + schoolCountDict[key] + "\n")
     }
-    console.log();
-    return;
+    return schoolReport;
 }

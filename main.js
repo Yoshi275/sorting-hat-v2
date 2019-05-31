@@ -1,5 +1,5 @@
 var Lodash = require("./lodash.js");
-// var Stats = require("./stats.js");
+var Stats = require("./stats.js");
 
 if(typeof require !== 'undefined') XLSX = require('xlsx');
 let workbook = XLSX.readFile('fop scholaris sorting list.xlsx');
@@ -54,10 +54,14 @@ for(let i = 0; i < sortedByFacultiesJCGender.length; i++) {
 }
 
 for(let house in houses) {
-    console.log(house);
+    /*console.log(house);
     let houseArr = houses[house];
     for(let i = 0; i < houseArr.length; i++) {
         console.log(houseArr[i].Name);
     }
-    console.log("\n\n");
+    console.log("\n\n");*/
+    console.log(house + " STATS: ");
+    console.log("GENDER: \n" + Stats.countGenders(houses[house]) + "\n");
+    console.log("FACULTIES: \n" + Stats.countFaculties(houses[house]) + "\n");
+    console.log("SCHOOLS: \n" + Stats.countSchools(houses[house]) + "\n");
 }

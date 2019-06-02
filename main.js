@@ -21,8 +21,8 @@ let tempNameListJSON = Lodash.shuffle(namelistJSON);
 let shuffledNameListJSON = Lodash.shuffle(tempNameListJSON);
 // console.log(shuffledNameListJSON[3]);
 
-// uses a stable sort to sort. Priority: Faculty > JC > Gender
-let sortedByFacultiesJCGender = Lodash.sortBy(shuffledNameListJSON, ["Faculty", "School", "Gender"]);
+// uses a stable sort to sort. Priority: Faculty > Gender > JC
+let sortedByFacultiesJCGender = Lodash.sortBy(shuffledNameListJSON, ["Faculty", "Gender", "School"]);
 
 // initialising houses in houses dict
 // thought: in future, create function with parameter n groups, sorting array into n groups
@@ -54,14 +54,26 @@ for(let i = 0; i < sortedByFacultiesJCGender.length; i++) {
 }
 
 for(let house in houses) {
-    /*console.log(house);
+    console.log(house);
     let houseArr = houses[house];
     for(let i = 0; i < houseArr.length; i++) {
-        console.log(houseArr[i].Name);
+        //console.log(houseArr[i].Name);
+        houseArr[i].House = house;
     }
-    console.log("\n\n");*/
-    console.log(house + " STATS: ");
+    console.log("\n\n");
+    console.log("!!!STATS: ");
     console.log("GENDER: \n" + Stats.countGenders(houses[house]) + "\n");
     console.log("FACULTIES: \n" + Stats.countFaculties(houses[house]) + "\n");
     console.log("SCHOOLS: \n" + Stats.countSchools(houses[house]) + "\n");
 }
+
+/*var editedWS = XLSX.utils.json_to_sheet([
+    "SheetJS".split(""),
+    [1,2,3,4,5,6,7],
+    [2,3,4,5,6,7,8]
+]);*/
+let editedWB = XLSX.utils.book_new();
+let editedWS;
+editedWS = XLSX.utils.json_to_sheet(houses["SAREN"]);
+XLSX.utils.book_append_sheet(editedWB, editedWS, "SAREN");
+XLSX.writeFile(editedWB, 'SAREN.csv');

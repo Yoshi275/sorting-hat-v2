@@ -1,3 +1,5 @@
 # ignore data file
-fop scholaris sorting list.xlsx
-~$fop scholaris sorting list.xlsx
+
+// data files
+*.xlsx
+*.csv
